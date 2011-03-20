@@ -2,9 +2,21 @@ module Upkeep (
   getUpkeep
 ) where
 
-getUpkeep :: Int -> Double -> Double -> Double
-getUpkeep 0 size period = undefined
-getUpkeep 1 size period = undefined
+-- так, чуваки, чтобы избежать везде явного выбора типа из класса типов, я не буду париться
+-- с оптимизацией памяти и просто буду юзать повсюду Double. Не бейте, если что...
+--
+-- собственно, главная функция, принимает на вход два параметра - размер заказа и период заказа
+getUpkeep :: Double -> Double -> Double
+getUpkeep size period = getUpkeep' 365 0 period 100
+-- так, посоны, тут надо комментить, иначе сам потом не пойму, что к чемуш
+-- если счётчик дней достигает нуля, останавливаем рекурсию и возвращаем аккумулированные расходы
+-- если он не нулевой, добавляем к текущим расходам расходы на сегодня, вычитаем день и уменьшаем счётчик дней 
+-- до поступления следующего заказа
+-- если счётчик до заказа становится нулевым, возвращаем ему значение периода и добавляем к расходам сумму за оформление заказа
+  where getUpkeep' 0 upkeep remains storage = upkeep
+        getUpkeep' days upkeep remains storage
+          | remains == 0 = getUpkeep' (days - 1) (upkeep + (dayUpkeep (storage - taken + (size * isDelivered ))remains)) period storage
+          | otherwise = getUpkeep' (days - 1) (upkeep + (dayUpkeep storage remains)) (period - 1) storage
 
 -- функция должна принимать:
 --  текущее количество товара на складе
@@ -15,7 +27,13 @@ getUpkeep 1 size period = undefined
 -- расходы формируем как сумму затрат на заказ orderCost и затрат на хранение единицы
 -- unitCost (в случае дефицита просто берём модуль)
 dayUpkeep :: Double -> Double -> Double
-dayUpkeep storage 0 = storage * unitCost + orderCost
+dayUpkeep storage 0 = abs storage * unitCost + orderCost
+dayUpkeep storage _ = abs storage * unitCost
+
+-- функция возвращает либо ноль, либо единицу, в зависимости от того, пришёл ли заказ
+-- принимает число дней от оформления заказа (распределение вероятности доставки заказа
+-- геометрическое) - в первый день вероятность близка к нулю, в последний - единица
+-- предвижу монадный апокалипсис
 
 -- стоимость одной единицы товара на складе, константа, попросту говоря
 unitCost :: Double

@@ -1,13 +1,10 @@
-module Dices (
-getOrder,
-randomSequence,
-getDistrLine
-) where
--- this module contains functions for getting random values for orders and delays
+module Distributions where
 
 import Data.List
 import System.Random
+import Control.Monad
 
+{-
 getY :: (Floating t) => t -> t -> t -> t
 getY m d x = 1.0 / (sqrt (2 * pi * d)) * exp (- (x - m)^2 / (2 * d))
 
@@ -27,5 +24,15 @@ getOrder (m, d, (l, r), seed) = findIndex (\x -> x >= y) (tail (scanl (+) 0 line
 	   		  	where line = map round (getDistrLine (map (getY m d) [l..r]))
 				      y    = randomSequence (l, upperBound) seed [] !! seed
 		     		             where upperBound = sum line
+-}
 
+geomDecide :: Int -> Int
+geomDecide day =
+  | liftM2 (<) rand (return (getGeomDistr (1, 20) !! day) :: IO Double) = 0
+  | otherwise = 1
+  
+getGeomDistr :: (Double, Double) -> [Double]
+getGeomDistr = undefined
 
+rand :: IO Double
+rand = undefined
