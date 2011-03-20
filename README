@@ -1,0 +1,17 @@
+Vespa is my homework for modelling. It describes storage upkeep depending on
+order size and period.
+
+For build just type 
+
+  ghc Main.hs -o vespa --make
+
+in your terminal. Of course you should have Glasgow haskell compiler for this purpose.
+Then you can run it
+  
+  ./vespa
+
+It'll give you two values - optimal order size and period - and will draw two graphics
+in pdf. Search them under current directory.
+
+Ingen ord mer.
+
