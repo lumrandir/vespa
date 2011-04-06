@@ -2,44 +2,50 @@ module Upkeep (
   getUpkeep
 ) where
 
--- так, чуваки, чтобы избежать везде явного выбора типа из класса типов, я не буду париться
+import Distributions
+import Debug.Trace
+
+-- чтобы избежать везде явного выбора типа из класса типов, я не буду париться
 -- с оптимизацией памяти и просто буду юзать повсюду Double. Не бейте, если что...
 --
--- собственно, главная функция, принимает на вход два параметра - размер заказа и период заказа
-getUpkeep :: Double -> Double -> Double
-getUpkeep size period = getUpkeep' 365 0 period 100
--- так, посоны, тут надо комментить, иначе сам потом не пойму, что к чемуш
+-- собственно, главная функция, принимает на вход три параметра - размер заказа, период заказа и 
+-- кучу рандомных чисел
+getUpkeep :: Double -> Double -> ([Double], [Double]) -> Double
+getUpkeep size period (nRnd, gRnd) = getUpkeep' 365 0 period 10 (nRnd, gRnd)
 -- если счётчик дней достигает нуля, останавливаем рекурсию и возвращаем аккумулированные расходы
 -- если он не нулевой, добавляем к текущим расходам расходы на сегодня, вычитаем день и уменьшаем счётчик дней 
 -- до поступления следующего заказа
 -- если счётчик до заказа становится нулевым, возвращаем ему значение периода и добавляем к расходам сумму за оформление заказа
-  where getUpkeep' 0 upkeep remains storage = upkeep
-        getUpkeep' days upkeep remains storage
-          | remains == 0 = getUpkeep' (days - 1) (upkeep + (dayUpkeep (storage - taken + (size * isDelivered ))remains)) period storage
-          | otherwise = getUpkeep' (days - 1) (upkeep + (dayUpkeep storage remains)) (period - 1) storage
+  where getUpkeep' 0 upkeep remains storage (ns, gs) = upkeep
+        getUpkeep' days upkeep remains storage (n:ns, g:gs)
+          | remains == 0 = let nStor = newStorage storage (n, g)
+                           in getUpkeep' (days - 1) (upkeep + (toDayUpkeep nStor remains)) period nStor (ns, gs)
+          | otherwise = let nStor = newStorage storage (n, g)
+                        in getUpkeep' (days - 1) (upkeep + (toDayUpkeep nStor remains)) (remains - 1) nStor (ns, gs)
 
--- функция должна принимать:
---  текущее количество товара на складе
---  число дней, оставшихся до поступления следующего заказа
--- вроде бы этого достаточно...
--- возвращать будет, естессно Double - величина затрат за текущий день
--- итак, если имеем ноль на входе там, где должны быть дни до заказа,
--- расходы формируем как сумму затрат на заказ orderCost и затрат на хранение единицы
--- unitCost (в случае дефицита просто берём модуль)
-dayUpkeep :: Double -> Double -> Double
-dayUpkeep storage 0 = abs storage * unitCost + orderCost
-dayUpkeep storage _ = abs storage * unitCost
-
--- функция возвращает либо ноль, либо единицу, в зависимости от того, пришёл ли заказ
--- принимает число дней от оформления заказа (распределение вероятности доставки заказа
--- геометрическое) - в первый день вероятность близка к нулю, в последний - единица
--- предвижу монадный апокалипсис
+-- изменившийся объём товара на складе (+ привезли - забрали)
+newStorage :: Double -> (Double, Double) -> Double
+newStorage storage (n, g) = storage - (getNormal (10, 5, (1, 19)) n)
+-- расходы за сегодня равны сумме на хранение товара, который уже есть
+-- за вычетом суммы на хранение товара, который сегодня забрали
+-- плюс сумма на хранение товара, который сегодня (возможно) привезли
+-- плюс сумма за оформление заказа, если это необходимо
+--
+-- очевидно, функция должна принимать текущий объём товара на складе
+-- и время, оставшееся до следующего заказа
+-- и пару случайных чисел для вычисления спроса и привоза
+toDayUpkeep :: Double -> Double -> Double
+-- toDayUpkeep storage remains | trace ("storage " ++ (show storage)) False = undefined
+toDayUpkeep storage remains = positive storage * unitCost + (orderCost remains)
+  where positive s | s > 0 = s
+                   | otherwise = 0
 
 -- стоимость одной единицы товара на складе, константа, попросту говоря
 unitCost :: Double
 unitCost = 1
 
 -- затраты на оформление заказа
-orderCost :: Double
-orderCost = 5
+orderCost :: Double -> Double
+orderCost 0 = 5
+orderCost _ = 0
 

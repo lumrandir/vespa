@@ -1,6 +1,8 @@
 module Distributions where
 
 import Data.List
+import Maybe
+import Debug.Trace
 
 getNormalY :: Double-> Double-> Double -> Double
 getNormalY m d x = 1.0 / (sqrt (2 * pi * d)) * exp (- (x - m)^2 / (2 * d))
@@ -9,12 +11,13 @@ getDistrLine :: [Double] -> [Double]
 getDistrLine xs = map (* k) xs
 	     	  where k = 1 / (head xs)
 
-getNormal :: (Double, Double, (Double, Double)) -> Double -> Maybe Int
-getNormal (m, d, (l, r)) rnd = findIndex (\x -> x >= rnd) (tail (scanl (+) 0 line))
+getNormal :: (Double, Double, (Double, Double)) -> Double -> Double
+-- getNormal (m, d, (l, r)) rnd | trace ("getNormal " ++ (show rnd)) False = undefined
+getNormal (m, d, (l, r)) rnd = fromIntegral $ fromJust $ findIndex (>= rnd) (tail (scanl (+) 0 line)) :: Double
   where line = getDistrLine $ map (getNormalY m d) [l..r]
 
 getNormalUpperBound :: (Double, Double, (Double, Double)) -> Double
-getNormalUpperBound (m, d, (l, r)) = sum list
+getNormalUpperBound (m, d, (l, r)) = head $ reverse list
   where list = tail $ scanl (+) 0 line
         line = getDistrLine $ map (getNormalY m d) [l..r]
 
