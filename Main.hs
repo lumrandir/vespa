@@ -8,27 +8,45 @@ import System.Random
 import Control.Monad
 import Maybe
 
+fixedSize :: Double
+fixedSize = 10
+
+fixedPeriod :: Double
+fixedPeriod = 10
+
 main :: IO ()
 main = do
--- сначала достанем верхнее значение нашего нормального распределения
-  let upperNormal = getNormalUpperBound (10, 5, (1, 19))
--- теперь сгенерим бесконечный список случайных значений в пределах от 1 до верхнего значения
-  let listNormal = getStdGen >>= (\g -> return (randomRs (1, upperNormal) g))
--- теперь проделаем ту же самую фигню для геометрического распределения
-  let upperGeom = getGeomUpperBound 0.7 (1, 19)
-  let listGeom = getStdGen >>= (\g -> return (randomRs (1, upperGeom) g))
--- пакуем их в кортеж
-  let rnd = liftM2 (\x y -> (x, y)) listNormal listGeom
--- теперь запустим вычисления, вбросив этот кортеж в качестве источников рандомных чисел
-  let fixedPeriodUpkeep = rnd >>= (\r -> return ([ getUpkeep x 10 r | x <- [1..20] ]))
-  let fixedSizeUpkeep = rnd >>= (\r -> return ([ getUpkeep 10 x r | x <- [1..20] ]))
--- рисуем графики
-  fpu <- fixedPeriodUpkeep
-  fsu <- fixedSizeUpkeep
-  plotPDF "fixedPeriod.pdf" ([1..20] :: [Double]) (fpu) "Upkeep with constant order period"
-  plotPDF "fixedSize.pdf" ([1..20] :: [Double]) (fsu) "Upkeep with constant order size"
+-- получим данные
+  fpu <- roll False countBound []
+  fsu <- roll True countBound []
+-- отрисуем графики:
+  plotPDF "fixedPeriod.pdf" [1..countBound] fpu "Upkeep with constant order period"
+  plotPDF "fixedSize.pdf" [1..countBound] fsu "Upkeep with constant order size"
 -- ищем оптимальные значения
   let optimalSize = fromJust (findIndex (== (minimum fpu)) fpu) + 1
   let optimalPeriod = fromJust (findIndex (== (minimum fsu)) fsu) + 1
   putStrLn $ "Optimal order size is: " ++ (show optimalSize) ++ "\nOptimal order period is: " ++  (show optimalPeriod)
 
+rnd :: IO ([Double], [Double])
+rnd = do
+-- обновим генератор
+  newStdGen
+-- найдём границы
+  let upperNormal = getNormalUpperBound (countBound / 2, 5, (1, countBound - 1))
+  let upperGeom = getGeomUpperBound 0.7 (1, countBound - 1)
+-- получим списки рандомов
+  let listNormal = getStdGen >>= (\g -> return (randomRs (1, upperNormal) g))
+  let listGeom = getStdGen >>= (\g -> return (randomRs (1, upperGeom) g))
+-- упакуем и отошлём их
+  liftM2 (\x y -> (x, y)) listNormal listGeom
+
+roll :: Bool -> Double -> [Double] -> IO [Double]
+roll t 0 acc = do
+  return acc
+roll t x acc = do
+  r <- rnd
+  let u = case t of
+            True -> getUpkeep fixedSize x r
+            False -> getUpkeep x fixedPeriod r
+  roll t (x - 1) (u:acc)
+ 
