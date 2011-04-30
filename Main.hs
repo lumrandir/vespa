@@ -36,7 +36,7 @@ rnd = do
   let upperGeom = getGeomUpperBound 0.7 (1, countBound - 1)
 -- получим списки рандомов
   let listNormal = getStdGen >>= (\g -> return (randomRs (1, upperNormal) g))
-  let listGeom = getStdGen >>= (\g -> return (randomRs (1, upperGeom) g))
+  let listGeom = getStdGen >>= (\g -> return (randomRs (0, upperGeom) g))
 -- упакуем и отошлём их
   liftM2 (\x y -> (x, y)) listNormal listGeom
 
@@ -46,7 +46,7 @@ roll t 0 acc = do
 roll t x acc = do
   r <- rnd
   let u = case t of
-            True -> getUpkeep fixedSize x r
-            False -> getUpkeep x fixedPeriod r
+            True -> getUpkeep (fixedSize, x) r
+            False -> getUpkeep (x, fixedPeriod) r
   roll t (x - 1) (u:acc)
  

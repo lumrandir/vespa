@@ -12,7 +12,6 @@ getDistrLine xs = map (* k) xs
 	     	  where k = 1 / (head xs)
 
 getNormal :: (Double, Double, (Double, Double)) -> Double -> Double
--- getNormal (m, d, (l, r)) rnd | trace ("getNormal " ++ (show rnd)) False = undefined
 getNormal (m, d, (l, r)) rnd = fromIntegral $ fromJust $ findIndex (>= rnd) (tail (scanl (+) 0 line)) :: Double
   where line = getDistrLine $ map (getNormalY m d) [l..r]
 
