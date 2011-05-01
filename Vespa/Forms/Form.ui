@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>841</width>
+    <height>446</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>gVespa</string>
+  </property>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>224</width>
+     <height>332</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="initialStorageLabel">
+      <property name="text">
+       <string>Стартовый запас</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="initialStorageEdit">
+      <property name="inputMask">
+       <string>00000; </string>
+      </property>
+      <property name="text">
+       <string>100</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="countPeriodLabel">
+      <property name="text">
+       <string>Период расчёта</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="countPeriodEdit">
+      <property name="inputMask">
+       <string>0000; </string>
+      </property>
+      <property name="text">
+       <string>365</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="fixedPeriodLabel">
+      <property name="text">
+       <string>Фиксированный период</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="fixedPeriodEdit">
+      <property name="inputMask">
+       <string>000; </string>
+      </property>
+      <property name="text">
+       <string>10</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="fixedSizeLabel">
+      <property name="text">
+       <string>Фиксированный размер заказа</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="fixedSizeEdit">
+      <property name="inputMask">
+       <string>000; </string>
+      </property>
+      <property name="text">
+       <string>10</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="maxPeriodLabel">
+      <property name="text">
+       <string>Максимальный период</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="maxPeriodEdit">
+      <property name="inputMask">
+       <string>000; </string>
+      </property>
+      <property name="text">
+       <string>20</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="maxSizeLabel">
+      <property name="text">
+       <string>Максимальный размер заказа</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="maxSizeEdit">
+      <property name="inputMask">
+       <string>000; </string>
+      </property>
+      <property name="text">
+       <string>20</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>10</y>
+     <width>351</width>
+     <height>209</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QLabel" name="ordSizeLabel">
+        <property name="text">
+         <string>Величина спроса</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="ordSizeEdit">
+        <property name="inputMask">
+         <string>000; </string>
+        </property>
+        <property name="text">
+         <string>10</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="ordProbLabel">
+        <property name="text">
+         <string>Вес величины</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="ordProbEdit">
+        <property name="inputMask">
+         <string>0.00; </string>
+        </property>
+        <property name="text">
+         <string>1.00</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="addOrdButton">
+        <property name="text">
+         <string>Добавить</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="removeOrdButton">
+        <property name="text">
+         <string>Удалить</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="clearOrdButton">
+        <property name="text">
+         <string>Очистить</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QTableWidget" name="ordTable">
+      <column>
+       <property name="text">
+        <string>Значение</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Вес</string>
+       </property>
+      </column>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="layoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>230</y>
+     <width>351</width>
+     <height>209</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <widget class="QLabel" name="delSizeLabel">
+        <property name="text">
+         <string>Срок поставки</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="delSizeEdit">
+        <property name="inputMask">
+         <string>00; </string>
+        </property>
+        <property name="text">
+         <string>1</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="delProbLabel">
+        <property name="text">
+         <string>Вес величины</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="delProbEdit">
+        <property name="inputMask">
+         <string>0.00; </string>
+        </property>
+        <property name="text">
+         <string>1.00</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="addDelButton">
+        <property name="text">
+         <string>Добавить</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="removeDelButton">
+        <property name="text">
+         <string>Удалить</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="clearDelButton">
+        <property name="text">
+         <string>Очистить</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QTableWidget" name="delTable">
+      <column>
+       <property name="text">
+        <string>Размер</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Вес</string>
+       </property>
+      </column>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>607</x>
+     <y>10</y>
+     <width>226</width>
+     <height>383</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_7">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QLabel" name="unitCostLabel">
+        <property name="text">
+         <string>Затраты на хранение единицы</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="unitCostEdit">
+        <property name="inputMask">
+         <string>00; </string>
+        </property>
+        <property name="text">
+         <string>1</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="orderCostLabel">
+        <property name="text">
+         <string>Затраты на оформление заказа</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="orderCostEdit">
+        <property name="inputMask">
+         <string>00; </string>
+        </property>
+        <property name="text">
+         <string>5</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="deficitCostLabel">
+        <property name="text">
+         <string>Штраф за дефицит единицы</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="deficitCostEdit">
+        <property name="inputMask">
+         <string>00; </string>
+        </property>
+        <property name="text">
+         <string>1</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_5">
+      <item>
+       <widget class="QLabel" name="resultPeriodLabel">
+        <property name="text">
+         <string>Оптимальный период заказов</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="resultPeriodEdit"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="showPeriodChart">
+        <property name="text">
+         <string>Показать график</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_6">
+      <item>
+       <widget class="QLabel" name="resultSizeLabel">
+        <property name="text">
+         <string>Оптимальный размер заказа</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="resultSizeEdit"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="showSizeChart">
+        <property name="text">
+         <string>Показать график</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QPushButton" name="calcButton">
+        <property name="text">
+         <string>Расчёт</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="quitButton">
+        <property name="text">
+         <string>Выход</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>quitButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>772</x>
+     <y>383</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>814</x>
+     <y>426</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearDelButton</sender>
+   <signal>clicked()</signal>
+   <receiver>delTable</receiver>
+   <slot>clearContents()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>331</x>
+     <y>425</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>525</x>
+     <y>362</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearOrdButton</sender>
+   <signal>clicked()</signal>
+   <receiver>ordTable</receiver>
+   <slot>clearContents()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>332</x>
+     <y>204</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>508</x>
+     <y>153</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
