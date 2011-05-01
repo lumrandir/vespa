@@ -297,7 +297,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>607</x>
@@ -444,34 +444,18 @@
    </hints>
   </connection>
   <connection>
-   <sender>clearDelButton</sender>
-   <signal>clicked()</signal>
-   <receiver>delTable</receiver>
-   <slot>clearContents()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>331</x>
-     <y>425</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>525</x>
-     <y>362</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>clearOrdButton</sender>
    <signal>clicked()</signal>
    <receiver>ordTable</receiver>
-   <slot>clearContents()</slot>
+   <slot>reset()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>332</x>
-     <y>204</y>
+     <x>334</x>
+     <y>207</y>
     </hint>
     <hint type="destinationlabel">
-     <x>508</x>
-     <y>153</y>
+     <x>452</x>
+     <y>172</y>
     </hint>
    </hints>
   </connection>
