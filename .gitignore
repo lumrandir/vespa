@@ -4,4 +4,4 @@
 *.pdf
 vespa
 *.hc
-
+*.pyc
