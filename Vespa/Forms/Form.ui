@@ -36,7 +36,7 @@
        <string>00000; </string>
       </property>
       <property name="text">
-       <string>100</string>
+       <string>0</string>
       </property>
      </widget>
     </item>
@@ -70,7 +70,7 @@
        <string>000; </string>
       </property>
       <property name="text">
-       <string>10</string>
+       <string>1</string>
       </property>
      </widget>
     </item>
@@ -87,7 +87,7 @@
        <string>000; </string>
       </property>
       <property name="text">
-       <string>10</string>
+       <string>1</string>
       </property>
      </widget>
     </item>
@@ -152,7 +152,7 @@
          <string>000; </string>
         </property>
         <property name="text">
-         <string>10</string>
+         <string>1</string>
         </property>
        </widget>
       </item>
@@ -339,7 +339,7 @@
          <string>00; </string>
         </property>
         <property name="text">
-         <string>5</string>
+         <string>2</string>
         </property>
        </widget>
       </item>
@@ -367,7 +367,7 @@
       <item>
        <widget class="QLabel" name="resultPeriodLabel">
         <property name="text">
-         <string>Оптимальный период заказов</string>
+         <string>Оптимальный размер заказов</string>
         </property>
        </widget>
       </item>
@@ -388,7 +388,7 @@
       <item>
        <widget class="QLabel" name="resultSizeLabel">
         <property name="text">
-         <string>Оптимальный размер заказа</string>
+         <string>Оптимальный период заказа</string>
         </property>
        </widget>
       </item>

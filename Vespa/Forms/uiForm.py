@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Form.ui'
 #
-# Created: Sun May  1 12:47:44 2011
+# Created: Mon May  9 15:49:19 2011
 #      by: PyQt4 UI code generator 4.7.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -199,16 +199,16 @@ class Ui_Form(object):
         Form.setWindowTitle(QtGui.QApplication.translate("Form", "gVespa", None, QtGui.QApplication.UnicodeUTF8))
         self.initialStorageLabel.setText(QtGui.QApplication.translate("Form", "Стартовый запас", None, QtGui.QApplication.UnicodeUTF8))
         self.initialStorageEdit.setInputMask(QtGui.QApplication.translate("Form", "00000; ", None, QtGui.QApplication.UnicodeUTF8))
-        self.initialStorageEdit.setText(QtGui.QApplication.translate("Form", "100", None, QtGui.QApplication.UnicodeUTF8))
+        self.initialStorageEdit.setText(QtGui.QApplication.translate("Form", "0", None, QtGui.QApplication.UnicodeUTF8))
         self.countPeriodLabel.setText(QtGui.QApplication.translate("Form", "Период расчёта", None, QtGui.QApplication.UnicodeUTF8))
         self.countPeriodEdit.setInputMask(QtGui.QApplication.translate("Form", "0000; ", None, QtGui.QApplication.UnicodeUTF8))
         self.countPeriodEdit.setText(QtGui.QApplication.translate("Form", "365", None, QtGui.QApplication.UnicodeUTF8))
         self.fixedPeriodLabel.setText(QtGui.QApplication.translate("Form", "Фиксированный период", None, QtGui.QApplication.UnicodeUTF8))
         self.fixedPeriodEdit.setInputMask(QtGui.QApplication.translate("Form", "000; ", None, QtGui.QApplication.UnicodeUTF8))
-        self.fixedPeriodEdit.setText(QtGui.QApplication.translate("Form", "10", None, QtGui.QApplication.UnicodeUTF8))
+        self.fixedPeriodEdit.setText(QtGui.QApplication.translate("Form", "1", None, QtGui.QApplication.UnicodeUTF8))
         self.fixedSizeLabel.setText(QtGui.QApplication.translate("Form", "Фиксированный размер заказа", None, QtGui.QApplication.UnicodeUTF8))
         self.fixedSizeEdit.setInputMask(QtGui.QApplication.translate("Form", "000; ", None, QtGui.QApplication.UnicodeUTF8))
-        self.fixedSizeEdit.setText(QtGui.QApplication.translate("Form", "10", None, QtGui.QApplication.UnicodeUTF8))
+        self.fixedSizeEdit.setText(QtGui.QApplication.translate("Form", "1", None, QtGui.QApplication.UnicodeUTF8))
         self.maxPeriodLabel.setText(QtGui.QApplication.translate("Form", "Максимальный период", None, QtGui.QApplication.UnicodeUTF8))
         self.maxPeriodEdit.setInputMask(QtGui.QApplication.translate("Form", "000; ", None, QtGui.QApplication.UnicodeUTF8))
         self.maxPeriodEdit.setText(QtGui.QApplication.translate("Form", "20", None, QtGui.QApplication.UnicodeUTF8))
@@ -217,7 +217,7 @@ class Ui_Form(object):
         self.maxSizeEdit.setText(QtGui.QApplication.translate("Form", "20", None, QtGui.QApplication.UnicodeUTF8))
         self.ordSizeLabel.setText(QtGui.QApplication.translate("Form", "Величина спроса", None, QtGui.QApplication.UnicodeUTF8))
         self.ordSizeEdit.setInputMask(QtGui.QApplication.translate("Form", "000; ", None, QtGui.QApplication.UnicodeUTF8))
-        self.ordSizeEdit.setText(QtGui.QApplication.translate("Form", "10", None, QtGui.QApplication.UnicodeUTF8))
+        self.ordSizeEdit.setText(QtGui.QApplication.translate("Form", "1", None, QtGui.QApplication.UnicodeUTF8))
         self.ordProbLabel.setText(QtGui.QApplication.translate("Form", "Вес величины", None, QtGui.QApplication.UnicodeUTF8))
         self.ordProbEdit.setInputMask(QtGui.QApplication.translate("Form", "0.00; ", None, QtGui.QApplication.UnicodeUTF8))
         self.ordProbEdit.setText(QtGui.QApplication.translate("Form", "1.00", None, QtGui.QApplication.UnicodeUTF8))
@@ -242,13 +242,13 @@ class Ui_Form(object):
         self.unitCostEdit.setText(QtGui.QApplication.translate("Form", "1", None, QtGui.QApplication.UnicodeUTF8))
         self.orderCostLabel.setText(QtGui.QApplication.translate("Form", "Затраты на оформление заказа", None, QtGui.QApplication.UnicodeUTF8))
         self.orderCostEdit.setInputMask(QtGui.QApplication.translate("Form", "00; ", None, QtGui.QApplication.UnicodeUTF8))
-        self.orderCostEdit.setText(QtGui.QApplication.translate("Form", "5", None, QtGui.QApplication.UnicodeUTF8))
+        self.orderCostEdit.setText(QtGui.QApplication.translate("Form", "2", None, QtGui.QApplication.UnicodeUTF8))
         self.deficitCostLabel.setText(QtGui.QApplication.translate("Form", "Штраф за дефицит единицы", None, QtGui.QApplication.UnicodeUTF8))
         self.deficitCostEdit.setInputMask(QtGui.QApplication.translate("Form", "00; ", None, QtGui.QApplication.UnicodeUTF8))
         self.deficitCostEdit.setText(QtGui.QApplication.translate("Form", "1", None, QtGui.QApplication.UnicodeUTF8))
-        self.resultPeriodLabel.setText(QtGui.QApplication.translate("Form", "Оптимальный период заказов", None, QtGui.QApplication.UnicodeUTF8))
+        self.resultPeriodLabel.setText(QtGui.QApplication.translate("Form", "Оптимальный размер заказов", None, QtGui.QApplication.UnicodeUTF8))
         self.showPeriodChart.setText(QtGui.QApplication.translate("Form", "Показать график", None, QtGui.QApplication.UnicodeUTF8))
-        self.resultSizeLabel.setText(QtGui.QApplication.translate("Form", "Оптимальный размер заказа", None, QtGui.QApplication.UnicodeUTF8))
+        self.resultSizeLabel.setText(QtGui.QApplication.translate("Form", "Оптимальный период заказа", None, QtGui.QApplication.UnicodeUTF8))
         self.showSizeChart.setText(QtGui.QApplication.translate("Form", "Показать график", None, QtGui.QApplication.UnicodeUTF8))
         self.calcButton.setText(QtGui.QApplication.translate("Form", "Расчёт", None, QtGui.QApplication.UnicodeUTF8))
         self.quitButton.setText(QtGui.QApplication.translate("Form", "Выход", None, QtGui.QApplication.UnicodeUTF8))
